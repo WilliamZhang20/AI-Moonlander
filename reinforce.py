@@ -46,3 +46,16 @@ def train(env, policy, optimizer, episodes=5000, gamma=0.99):
         
         returns = compute_returns(rewards, gamma)
         loss = -sum(log_prob * G for log_prob, G in zip(log_probs, returns))
+        
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+
+        if (episode + 1) % 100 == 0:
+            print(f"Episode {episode+1}, Total Reward: {sum(rewards):.2f}")
+
+if __name__ == "__main__":
+    env = gym.make("LunarLander-v3")
+    policy = PolicyNet(input_dim=env.observation_space.shape[0], output_dim=env.action_space.n)
+    optimizer = optim.Adam(policy.parameters(), lr=0.002)
+    train(env, policy, optimizer)
