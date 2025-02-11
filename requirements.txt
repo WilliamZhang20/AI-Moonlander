@@ -1,0 +1,7 @@
+gymnasium
+torch 
+torchvision
+swig
+set
+wheel
+"gymnasium[box2d]"
