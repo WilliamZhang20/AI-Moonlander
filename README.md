@@ -38,6 +38,6 @@ Demo of a successful landing by a model trained using the REINFORCE vanilla poli
 
 https://github.com/user-attachments/assets/1fe87cd9-be23-47b9-9dbb-ab5235fb352c
 
-In comparison, the PPO landing is much smoother (and faster!), thanks to better stability through variance minimization:
+In comparison, the PPO landing is much smoother (and faster!), thanks to better training stability through variance minimization:
 
 https://github.com/user-attachments/assets/7d0f386d-988c-4871-aaea-d9dfb8e056f8
