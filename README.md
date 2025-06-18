@@ -26,18 +26,18 @@ The REINFORCE policy gradient algorithm, implemented in PyTorch, uses a single p
 The A2C algorithm, also implemented in PyTorch, is *also* an on-policy method using two neural networks: an actor and a critic. The actor selects actions based on the current policy, while the critic evaluates the selected actions by estimating the state value function.
 - The actor network updates policy using an *advantage function* $$A^{\pi}(s, a)$$ which is the difference between state-action return $$Q(s, a)$$ and state value $$V(s)$$, where state value is given by the critic network.
 - The critic network updates parameters using Temporal Difference (TD) mean-squared-error of difference between estimated value and a bootstrapped estimation of the total cumulative reward.
-- In my implementation, I had the actor and critic in different neural networks to ensure flexibility, guaranteed and independent behavior, as well as easier convergence. However, some implementations have them share parts of their networks for efficiency and simplicity. 
+- In my implementation, I had the actor and critic in different neural networks to ensure flexibility, guaranteed and independent behavior, as well as easier convergence. However, some implementations have them share parts of their networks for efficiency and simplicity.
 
-## Upcoming updates
+I implemented the Proximal Policy Optimization (PPO) algorithm in PyTorch to use clipped [surrogate](https://www.mathworks.com/help/gads/surrogate-optimization-algorithm.html) objectives to ensure that updates do not make the model worse. It is the go-to algorithm of today, combining both replay memory and actor-critic policy updates to make training progression robust & stable. While Trust-Region Policy Optimization (TRPO) uses similar techniques, PPO is computationally cheaper, hence its strong popularity. 
 
-I should really try continuous action spaces, where the agent can not only choose which engine to fire, but also at what strength. After all, the primary advantage of policy gradient methods comes around continuous action spaces, where it is impossible for value-based methods to approximate an infinite set of action values. 
-
-Specifically, I need to use the very powerful [Proximal Policy Optimization (PPO)](https://www.mathworks.com/help/reinforcement-learning/ug/proximal-policy-optimization-agents.html), which is the #1 reinforcement learning algorithm used today.
-
-Another important algorithm that is todo for this project is Deep Deterministic Policy Gradient (DDPG), also highly efficient. 
+Additionally, I achieved strong model performance in continuous action spaces, where the agent can control the strength of each engine's power input, by applying the Deep Deterministic Policy Gradient (DDPG) algorithm in PyTorch.
 
 ## Demonstration
 
-Demo of a successful landing by a model trained using the REINFORCE policy gradient method:
+Demo of a successful landing by a model trained using the REINFORCE vanilla policy gradient method:
 
 https://github.com/user-attachments/assets/1fe87cd9-be23-47b9-9dbb-ab5235fb352c
+
+In comparison, the PPO landing is much smoother (and faster!), thanks to its stability and variance minimization:
+
+https://github.com/user-attachments/assets/7d0f386d-988c-4871-aaea-d9dfb8e056f8
